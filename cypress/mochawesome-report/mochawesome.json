@@ -1,0 +1,193 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 1,
+    "pending": 0,
+    "failures": 4,
+    "start": "2024-07-14T23:11:57.644Z",
+    "end": "2024-07-14T23:12:15.454Z",
+    "duration": 17810,
+    "testsRegistered": 5,
+    "passPercent": 20,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4971e692-d2e2-47e0-9d85-3897393833dd",
+      "title": "",
+      "fullFile": "cypress\\e2e\\userCreateaccount.spec.js",
+      "file": "cypress\\e2e\\userCreateaccount.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4c28ede9-9e81-40ad-8caf-b2b36550b81c",
+          "title": "User Create Account",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should create an account",
+              "fullTitle": "User Create Account should create an account",
+              "timedOut": null,
+              "duration": 6601,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Destructure constants from userData\nconst {\n  firstName,\n  lastName,\n  email,\n  phoneNumber,\n  address,\n  password,\n  confirmPassword\n} = _constants.userData;\n// Generate unique data\ncy.get('#input-26').type(firstName);\ncy.get('#input-28').type(lastName);\ncy.get('#input-30').type(email);\n// Using eq() to select the first matching element\ncy.get('[id^=\"input-\"]').should('be.visible').eq(4).type(phoneNumber);\ncy.get('[id^=\"input-\"]').should('be.visible').eq(5).type(address);\ncy.get('[id^=\"input-\"]').should('be.visible').eq(6).type(password);\ncy.get('[id^=\"input-\"]').should('be.visible').eq(6).type(confirmPassword);\n// Generate random boolean for isMarketing checkbox\nconst isMarketing = Math.random() < 0.5; // 50% chance of being true or false\nif (isMarketing) {\n  // Example: Check if visible and not disabled before clicking\n  cy.get('[id^=\"checkbox-\"]').check(); // Check the checkbox if isMarketing is true\n} else {\n  cy.get('[id^=\"checkbox-\"]').uncheck(); // Uncheck the checkbox if isMarketing is false\n}\ncy.get('body > div.v-overlay-container > div > div.v-overlay__content > div > button > span.v-btn__content').click();\n//cy.url().should('include', '/dashboard');\n//cy.contains('Welcome, Thecla').should('be.visible');",
+              "err": {},
+              "uuid": "32d70ee1-0547-4e28-9bdb-9b80c09d4116",
+              "parentUUID": "4c28ede9-9e81-40ad-8caf-b2b36550b81c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should return error for duplicate email",
+              "fullTitle": "User Create Account should return error for duplicate email",
+              "timedOut": null,
+              "duration": 2590,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Generate unique data\ncy.get('#input-26').type(firstName);\ncy.get('#input-28').type(lastName);\ncy.get('#input-30').as('emailInput').type(\"theclaworld@gmail.com\");\n// Using eq() to select the first matching element\ncy.get('[id^=\"input-\"]').should('be.visible').eq(4).type(phoneNumber);\ncy.get('[id^=\"input-\"]').should('be.visible').eq(5).type(address);\ncy.get('[id^=\"input-\"]').should('be.visible').eq(6).type(password);\ncy.get('[id^=\"input-\"]').should('be.visible').eq(6).type(confirmPassword);\n// Generate random boolean for isMarketing checkbox\nconst isMarketing = Math.random() < 0.5; // 50% chance of being true or false\nif (isMarketing) {\n  // Example: Check if visible and not disabled before clicking\n  cy.get('[id^=\"checkbox-\"]').check(); // Check the checkbox if isMarketing is true\n} else {\n  cy.get('[id^=\"checkbox-\"]').uncheck(); // Uncheck the checkbox if isMarketing is false\n}\ncy.get('body > div.v-overlay-container > div > div.v-overlay__content > div > button > span.v-btn__content').click();\ncy.contains('Email already exists').should('be.visible');",
+              "err": {
+                "message": "ReferenceError: firstName is not defined",
+                "estack": "ReferenceError: firstName is not defined\n    at Context.eval (webpack://my-petshop-tests/./cypress/e2e/userCreateaccount.spec.js:55:26)",
+                "diff": null
+              },
+              "uuid": "5864e3e5-02b9-4d3e-b689-cd7b5dbbe5f7",
+              "parentUUID": "4c28ede9-9e81-40ad-8caf-b2b36550b81c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should not create account with invalid email",
+              "fullTitle": "User Create Account should not create account with invalid email",
+              "timedOut": null,
+              "duration": 2233,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Destructure constants from userData\nconst {\n  firstName,\n  lastName,\n  email,\n  phoneNumber,\n  address,\n  password,\n  confirmPassword\n} = _constants.userData;\n// Generate unique data\ncy.get('#input-26').type(firstName);\ncy.get('#input-28').type(lastName);\ncy.get('#input-30').type(email);\ncy.get('#input-32').type(phoneNumber); // Ensure phone number includes random digits and country code\ncy.get('#input-34').type(password);\ncy.get('#input-36').type(address);\ncy.get('#input-38').type(confirmPassword);\n// Generate random boolean for isMarketing checkbox\nconst isMarketing = Math.random() < 0.5; // 50% chance of being true or false\nif (isMarketing) {\n  cy.get('#checkbox-40').check(); // Check the checkbox if isMarketing is true\n} else {\n  cy.get('#checkbox-40').uncheck(); // Uncheck the checkbox if isMarketing is false\n}\ncy.get('button[type=\"submit\"]').click();\ncy.contains('Invalid email format').should('be.visible');",
+              "err": {
+                "message": "TypeError: The following error originated from your application code, not from Cypress. It was caused by an unhandled promise rejection.\n\n  > Failed to fetch\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application",
+                "estack": "TypeError: The following error originated from your application code, not from Cypress. It was caused by an unhandled promise rejection.\n\n  > Failed to fetch\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application\n    at et (https://pet-shop.buckhill.com.hr/_nuxt/entry.978f3f7a.js:30:13448)\n    at async Proxy.fetchPromotions (https://pet-shop.buckhill.com.hr/_nuxt/entry.978f3f7a.js:30:25042)",
+                "diff": null
+              },
+              "uuid": "53fffb76-5d9e-4cf6-b133-226fc212eacc",
+              "parentUUID": "4c28ede9-9e81-40ad-8caf-b2b36550b81c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should not create account with short password",
+              "fullTitle": "User Create Account should not create account with short password",
+              "timedOut": null,
+              "duration": 2302,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Destructure constants from userData\nconst {\n  firstName,\n  lastName,\n  email,\n  phoneNumber,\n  address,\n  password,\n  confirmPassword\n} = _constants.userData;\n// Generate unique data\ncy.get('#input-26').type(firstName);\ncy.get('#input-28').type(lastName);\ncy.get('#input-30').type(email);\ncy.get('#input-32').type(phoneNumber); // Ensure phone number includes random digits and country code\ncy.get('#input-34').type(password);\ncy.get('#input-36').type(address);\ncy.get('#input-38').type(confirmPassword);\n// Generate random boolean for isMarketing checkbox\nconst isMarketing = Math.random() < 0.5; // 50% chance of being true or false\nif (isMarketing) {\n  cy.get('#checkbox-40').check(); // Check the checkbox if isMarketing is true\n} else {\n  cy.get('#checkbox-40').uncheck(); // Uncheck the checkbox if isMarketing is false\n}\ncy.get('button[type=\"submit\"]').click();\ncy.contains('Password too short').should('be.visible');",
+              "err": {
+                "message": "TypeError: The following error originated from your application code, not from Cypress. It was caused by an unhandled promise rejection.\n\n  > Failed to fetch\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application",
+                "estack": "TypeError: The following error originated from your application code, not from Cypress. It was caused by an unhandled promise rejection.\n\n  > Failed to fetch\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application\n    at et (https://pet-shop.buckhill.com.hr/_nuxt/entry.978f3f7a.js:30:13448)\n    at async Proxy.fetchBlogPosts (https://pet-shop.buckhill.com.hr/_nuxt/entry.978f3f7a.js:30:25168)",
+                "diff": null
+              },
+              "uuid": "901ac3e7-de2b-4681-a32a-4c0cbed87066",
+              "parentUUID": "4c28ede9-9e81-40ad-8caf-b2b36550b81c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should require all fields",
+              "fullTitle": "User Create Account should require all fields",
+              "timedOut": null,
+              "duration": 2326,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('button[type=\"submit\"]').click();\ncy.contains('First name is required').should('be.visible');\ncy.contains('Last name is required').should('be.visible');\ncy.contains('Email is required').should('be.visible');\ncy.contains('Password is required').should('be.visible');\ncy.contains('Password confirmation is required').should('be.visible');\ncy.contains('Address is required').should('be.visible');\ncy.contains('Phone number is required').should('be.visible');",
+              "err": {
+                "message": "TypeError: The following error originated from your application code, not from Cypress. It was caused by an unhandled promise rejection.\n\n  > Failed to fetch\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application",
+                "estack": "TypeError: The following error originated from your application code, not from Cypress. It was caused by an unhandled promise rejection.\n\n  > Failed to fetch\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application\n    at et (https://pet-shop.buckhill.com.hr/_nuxt/entry.978f3f7a.js:30:13448)\n    at async Proxy.fetchPromotions (https://pet-shop.buckhill.com.hr/_nuxt/entry.978f3f7a.js:30:25042)",
+                "diff": null
+              },
+              "uuid": "f4090d6e-5b37-4f5c-81fb-e7f4ae9def58",
+              "parentUUID": "4c28ede9-9e81-40ad-8caf-b2b36550b81c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "32d70ee1-0547-4e28-9bdb-9b80c09d4116"
+          ],
+          "failures": [
+            "5864e3e5-02b9-4d3e-b689-cd7b5dbbe5f7",
+            "53fffb76-5d9e-4cf6-b133-226fc212eacc",
+            "901ac3e7-de2b-4681-a32a-4c0cbed87066",
+            "f4090d6e-5b37-4f5c-81fb-e7f4ae9def58"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 16052,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
