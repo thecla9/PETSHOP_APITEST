@@ -1,0 +1,138 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-07-16T01:54:06.761Z",
+    "end": "2024-07-16T01:54:07.616Z",
+    "duration": 855,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "81ccb776-a41c-4688-8c6d-b5642fc9c974",
+      "title": "",
+      "fullFile": "cypress\\e2e\\admin_login.spec.js",
+      "file": "cypress\\e2e\\admin_login.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "18c87c79-315e-4ed1-b4af-a1df2be27013",
+          "title": "Admin Login API Test",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TS-01: Login with the correct credentials",
+              "fullTitle": "Admin Login API Test TS-01: Login with the correct credentials",
+              "timedOut": null,
+              "duration": 362,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: loginUrl,\n  body: adminCredentials,\n  failOnStatusCode: false\n}).then(response => {\n  expect(response.status).to.equal(200);\n  expect(response.body.data).to.have.property(\"token\");\n  authToken = response.body.data.token; // Store the token for subsequent requests\n});",
+              "err": {},
+              "uuid": "4d531d44-44ef-443d-9501-b5178aef1383",
+              "parentUUID": "18c87c79-315e-4ed1-b4af-a1df2be27013",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TS-02: Incorrect Admin Password",
+              "fullTitle": "Admin Login API Test TS-02: Incorrect Admin Password",
+              "timedOut": null,
+              "duration": 276,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: loginUrl,\n  body: {\n    email: 'admin@buckhill.co.uk',\n    password: 'wrongpassword'\n  },\n  failOnStatusCode: false // Allows checking error responses\n}).then(response => {\n  expect(response.status).to.equal(422); // Unauthorized status code\n  // Add assertions for error message or specific response handling\n});",
+              "err": {},
+              "uuid": "4ce8b40d-ae39-4dc1-baf6-b26d4e994cf5",
+              "parentUUID": "18c87c79-315e-4ed1-b4af-a1df2be27013",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TS-03: Empty Admin Email Field",
+              "fullTitle": "Admin Login API Test TS-03: Empty Admin Email Field",
+              "timedOut": null,
+              "duration": 197,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: loginUrl,\n  body: {\n    password: 'password123'\n  },\n  failOnStatusCode: false\n}).then(response => {\n  expect(response.status).to.equal(422); // Bad request status code\n  // Add assertions for error message or specific response handling\n});",
+              "err": {},
+              "uuid": "909efbd0-80e8-4f8b-a794-36ddb3835baf",
+              "parentUUID": "18c87c79-315e-4ed1-b4af-a1df2be27013",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4d531d44-44ef-443d-9501-b5178aef1383",
+            "4ce8b40d-ae39-4dc1-baf6-b26d4e994cf5",
+            "909efbd0-80e8-4f8b-a794-36ddb3835baf"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 835,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}

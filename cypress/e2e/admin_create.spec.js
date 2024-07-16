@@ -46,7 +46,7 @@ describe('Admin Create Account API Tests', () => {
     }).then((response) => {
       expect(response.status).to.equal(422);
       expect(response.body).to.have.property('error');
-      expect(response.body.error).to.include('Failed Validation'); 
+      expect(response.body.error).to.include('Failed Validation');
     });
   });
 
@@ -69,5 +69,21 @@ describe('Admin Create Account API Tests', () => {
       expect(response.body).to.have.property('error');
       expect(response.body.error).to.include('Failed Validation');
     });
+    });
+  it('TS-04: Create account with invalid email', () => {
+    cy.request({
+      method: 'POST',
+      url: apiUrl,
+      body: staticUserData,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      failOnStatusCode: false
+    }).then((response) => {
+      expect(response.status).to.equal(422);
+      expect(response.body).to.have.property('error');
+      expect(response.body.error).to.include("Failed Validation");
+    });
   });
 });
+
