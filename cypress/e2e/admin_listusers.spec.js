@@ -1,6 +1,6 @@
 describe('Admin User Listing API Tests', () => {
   const apiUrl = 'https://pet-shop.buckhill.com.hr/api/v1/admin/user-listing';
-  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvcGV0LXNob3AuYnVja2hpbGwuY29tLmhyIiwiZXhwIjoxNzIxMTQwMTk2LCJ1c2VyX3V1aWQiOiJhNWE4ZWQ3YS1hNDkyLTM2MWMtOTc4YS0xMjA4ZjM1YWEwNGIifQ.HMbfYpd5vgkSGF2x73bHcvTwud6L8NPZ_2TjeLI1-udinBm7NLpEy2FHy4HnjFbYgwpxinJfhM1hQx-yb-4DhTL09Q6E3-rVFU0NeIg0eVtt0s_VkVQm2iZygq_Yu4ww4uI31YpF4JQRXZjzjKAIyNBtC_6KuzEBPe9kx_NhSVq2cKgGwvIgi5bOZ_ZAh0Up3vTLIuiYNuh3zWWkYafeJK4b-tYvUHMLFcjLi-cy4_tQEGmG1hq6N9v6QUzTSB1jplIcDOL9bBMTclfSyxMFB1mOk0ZswOzUOa1vBfUlTsPXiR3UbV7sAI_OWbGZh_GtMu5kHID3hFx2VsfNAXmMUA';
+  const token = Cypress.env('ADMIN_API_TOKEN'); // Get ADMIN_API_TOKEN from .env file
   let tokenExpiry = 0;
   it('TS-01: Fetches admin user listing with specific filters', () => {
     const queryParams = {

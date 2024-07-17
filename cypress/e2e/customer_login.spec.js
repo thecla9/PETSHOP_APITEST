@@ -1,6 +1,6 @@
 
 describe('Customer Login API Test', () => {
-    let authToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvcGV0LXNob3AuYnVja2hpbGwuY29tLmhyIiwiZXhwIjoxNzIxMTM3MTQ0LCJ1c2VyX3V1aWQiOiJjMWMwODMwMy02MDc2LTQ2ZjYtYTQxNy04MzFmZjhkYTE3NWEifQ.IxEk4HjjFcFuia0NTCxlN_YtNmZ2MsXmw4Xik_cDmxaGMx_5zfVazuhK4jX_t5ssi7xitMY7e_Srdh0oXbbZm7RYepcC1M_tt87t0Dd7DtSQ2ZUTaj3RJKiRPNSm826OkjxOilOPAq5jRV8PG8dAyAv-lmtkicFD5AiabmCe9FlbcbfBTspvqJlnhlIirm9ZYyKbgiLsUMISOCQP5Ow6a0YRM5uZO9xTDCT-qpEe6jgalE8ssd20jlMypJKwIS9_Cwi_KP_CwUajFLSsabRALHnqLCMaTJFr6-CQHW70m3wI-DuOhKHajhBkdcBwWd05-dNDRfvISYKX_V6bbVBbxw';
+    let authToken = Cypress.env('USER_API_TOKEN'); // Get ADMIN_API_TOKEN from .env file
   
     const loginUrl = 'https://pet-shop.buckhill.com.hr/api/v1/user/login';
     const customerCredentials = { email: 'ezenwathecla90@gmail.com', password: 'golive@123' };
