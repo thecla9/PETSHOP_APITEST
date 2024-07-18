@@ -1,5 +1,3 @@
-// your_test_file.js
-
 const { staticUserData } = require('../support/constants');
 
 const apiUrl = 'https://pet-shop.buckhill.com.hr/api/v1/admin/create';
