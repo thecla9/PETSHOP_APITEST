@@ -3,8 +3,8 @@
 const staticUserData = {
   firstname: "Thecla",
   last_name: "EzenwaAB",
-  email: "admin@buckhill.co.uk",
-  password: "golive@123",
+  email: "ezenwathecla90@gmail.com",
+  password: "go@12345",
   password_confirmation: "golive@123",
   avatar: "avatar",
   address: "5 Adelabu Marsha, Lagos",
