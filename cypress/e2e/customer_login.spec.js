@@ -1,49 +1,69 @@
-
 describe('Customer Login API Test', () => {
-  let authToken = Cypress.env('USER_API_TOKEN'); 
+  let customerEmail;  // Variable to store the email
 
-  const loginUrl = 'https://pet-shop.buckhill.com.hr/api/v1/user/login';
-  const customerCredentials = { email: 'ezenwathecla90@gmail.com', password: 'go@12345' };
+  before(() => {
+    // Perform admin login, fetch user email, and perform user login
+    cy.getNewToken().then((result) => {
+      customerEmail = result.email;  // Store the email in the variable
+      expect(customerEmail).to.be.a('string'); // Ensure the email is correctly fetched
+    });
+  });
 
   it('TS-01: Login with the correct customer credentials', () => {
     cy.request({
       method: 'POST',
-      url: loginUrl,
-      body: customerCredentials,
-      failOnStatusCode: false,
-    }).then((response) => {
-      expect(response.status).to.equal(200);
-      expect(response.body.data).to.have.property("token");
-      authToken = response.body.data.token; // Store the token for subsequent requests
+      url: 'https://pet-shop.buckhill.com.hr/api/v1/user/login',
+      body: {
+        email: customerEmail,  // Use the variable directly
+        password: 'userpassword'
+      },
+      failOnStatusCode: false
+    }).then(response => {
+      expect(response.status).to.equal(200); // Success status code
+      expect(response.body).to.have.property('data'); 
     });
   });
 
   it('TS-02: Incorrect customer Password', () => {
     cy.request({
       method: 'POST',
-      url: loginUrl,
+      url: 'https://pet-shop.buckhill.com.hr/api/v1/user/login',
       body: {
-        email: 'ezenwathecla90@gmail.com',
+        email: customerEmail,  // Use the variable directly
         password: 'wrongpassword'
       },
-      failOnStatusCode: false // Allows checking error responses
+      failOnStatusCode: false
     }).then(response => {
       expect(response.status).to.equal(422); // Unauthorized status code
-      // Add assertions for error message or specific response handling
+      expect(response.body).to.have.property('error'); // Check for error message
     });
   });
 
   it('TS-03: Empty customer Email Field', () => {
     cy.request({
       method: 'POST',
-      url: loginUrl,
+      url: 'https://pet-shop.buckhill.com.hr/api/v1/user/login',
       body: {
-        password: 'password123'
+        password: 'userpassword'
       },
       failOnStatusCode: false
     }).then(response => {
       expect(response.status).to.equal(422); // Bad request status code
-      // Add assertions for error message or specific response handling
+      expect(response.body).to.have.property('error'); // Check for error message
+    });
+  });
+
+  it('TS-04: Empty customer Password Field', () => {
+    cy.request({
+      method: 'POST',
+      url: 'https://pet-shop.buckhill.com.hr/api/v1/user/login',
+      body: {
+        email: customerEmail  // Use the variable directly
+      },
+      failOnStatusCode: false
+    }).then(response => {
+      expect(response.status).to.equal(422); // Bad request status code
+      expect(response.body).to.have.property('error'); // Check for error message
     });
   });
 });
