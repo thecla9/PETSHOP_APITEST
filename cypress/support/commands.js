@@ -93,6 +93,20 @@ Cypress.Commands.add('getNewToken', () => {
     });
   });
 });
+Cypress.Commands.add('getResetToken', (email) => {
+  return cy.request({
+    method: 'POST',
+    url: 'https://pet-shop.buckhill.com.hr/api/v1/user/forgot-password',
+    body: {
+      email: email
+    }
+  }).then((response) => {
+    expect(response.status).to.equal(200);
+    const resetToken = response.body.data.resetToken; // Adjust according to the actual response structure
+    return resetToken;
+  });
+});
+
 
 Cypress.Commands.add('getUserUUID', (email) => {
   const adminToken = Cypress.env('ADMIN_API_TOKEN');
