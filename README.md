@@ -44,6 +44,7 @@ Option 2: Run tests in headless mode (CI/CD)
 
 #### Writing Tests
     This project follows the Page Object Model (POM) design pattern for test organization. You can find page objects in the cypress/page-objects directory, and test spec files in the cypress/e2e directory
+    Note: Mock data is used for the purpose of this test... to run the customerlogin and other tests that requires gettoken ensure that the the first email in the DB can be processed to avoid having status code 422 unprocess entity - this could be a reason these test will fail. 
 
 #### Custom Commands and Utilities
 This project may include custom Cypress commands, utility functions, or fixtures located in the cypress/support directory. These can be used to enhance test readability and reusability.
@@ -55,7 +56,9 @@ You can configure different environments (e.g., development, staging, production
 You can integrate this Cypress test suite into your CI/CD pipeline for automated testing.
 
 #### Screenshots and Videos
-Cypress can capture screenshots and videos during test runs, which can be helpful for debugging. Configure these options in the cypress.json file.
+Cypress can capture screenshots and videos during test runs, which can be helpful for debugging. This is Configured in the cypress.json file and you can view screen shots of errors and videos.
 
  #### Reporting
 Cypress provides built-in reporters like mochawesome and mochawesome-merge for generating test reports. You can configure these in the cypress.json file as well.
+You first need to start the mocha server  using http-server -p 8080 and then view generated reports in html - http://127.0.0.1:8080/mochawesome-report/
+
