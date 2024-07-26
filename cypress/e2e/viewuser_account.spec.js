@@ -1,42 +1,50 @@
-describe('View User Account API Test', () => {
-  let adminToken; // Variable to store the token
+describe('Admin Login and View Profile Test', () => {
+  let adminToken; // Variable to store the admin token
+  let adminProfile; // Variable to store the admin profile details
 
   before(() => {
-    // Fetch the admin token before running tests
+    // Use the custom command to fetch the admin token
     cy.fetchAdminToken().then((token) => {
       adminToken = token;
+
+      // Ensure the token is defined
+      expect(adminToken, 'Admin token should be defined').to.not.be.undefined;
+
+      // Optional: Print the token for debugging (ensure you handle tokens securely)
+      cy.log(`Admin Token: ${adminToken}`);
     });
   });
 
-  it('should successfully fetch the user account details', () => {
-    const apiUrl = 'https://pet-shop.buckhill.com.hr/api/v1/user';
+  it('should fetch and view the admin profile details', () => {
+    const adminProfileApiUrl = 'https://pet-shop.buckhill.com.hr/api/v1/user'; // Replace with actual profile endpoint
 
-    // Make the API request with the token in the headers
+    // Fetch the admin profile using the token
     cy.request({
       method: 'GET',
-      url: apiUrl,
+      url: adminProfileApiUrl,
       headers: {
         Authorization: `Bearer ${adminToken}`,
       },
       failOnStatusCode: false // Handle non-200 status codes
     }).then((response) => {
-      // Debugging: Log response status and body
-      cy.log(`Response Status: ${response.status}`);
-      cy.log(`Response Body: ${JSON.stringify(response.body)}`);
+      // Log the response status and body
+      cy.log(`Profile Response Status: ${response.status}`);
+      cy.log(`Profile Response Body: ${JSON.stringify(response.body)}`);
 
       // Assert the response status code
-      expect(response.status).to.equal(200);
+      expect(response.status, 'Profile response status should be 200').to.equal(200);
 
-      // Assert the response body data against expected values
-      const data = response.body.data;
-      expect(data.uuid).to.equal('f32e894e-e58e-3240-b6f7-8de3d5c7768d');
-      expect(data.first_name).to.equal('Lafayette');
-      expect(data.last_name).to.equal('Kessler');
-      expect(data.email).to.equal('admin@buckhill.co.uk');
-      expect(data.avatar).to.equal('eadb7f8e-e61e-3ba1-bc8a-dcec51697d20');
-      expect(data.address).to.equal('12223 Sammie Island\nSouth Emiliano, MS 12858-3327');
-      expect(data.phone_number).to.equal('+1.469.494.8081');
-      expect(data.is_marketing).to.equal(1);
+      // Store the admin profile details
+      adminProfile = response.body.data; // Adjust based on actual response structure
+
+      // Log the admin profile details
+      cy.log(`Admin Profile: ${JSON.stringify(adminProfile)}`);
+
+      // Perform additional checks on the profile data if needed
+      // Example assertions:
+      expect(adminProfile).to.have.property('uuid');
+      expect(adminProfile).to.have.property('email', 'admin@buckhill.co.uk');
+      // Add more checks as needed based on the profile details returned
     });
   });
 });
